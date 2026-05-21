@@ -1,0 +1,97 @@
+{
+  "version": "1.0.0",
+  "description": "Copy of ../design-tokens/uzapoint_tokens.json for Flutter asset bundle.",
+  "radius": {
+    "base": 10,
+    "sm": 6,
+    "md": 8,
+    "lg": 10,
+    "xl": 14,
+    "logo": 8
+  },
+  "spacing": {
+    "xs": 4,
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "xl": 32,
+    "touchMin": 48,
+    "touchPos": 56
+  },
+  "motion": {
+    "fastMs": 200,
+    "normalMs": 300,
+    "slowMs": 350,
+    "curve": "easeOutCubic"
+  },
+  "typography": {
+    "fontFamily": "Inter",
+    "displayLarge": { "size": 28, "weight": 700, "height": 1.2 },
+    "titleLarge": { "size": 22, "weight": 600, "height": 1.25 },
+    "titleMedium": { "size": 17, "weight": 600, "height": 1.3 },
+    "bodyLarge": { "size": 16, "weight": 400, "height": 1.5 },
+    "bodyMedium": { "size": 15, "weight": 400, "height": 1.45 },
+    "labelLarge": { "size": 14, "weight": 500, "height": 1.4 },
+    "labelSmall": { "size": 12, "weight": 500, "height": 1.35 }
+  },
+  "light": {
+    "background": "#FFFFFF",
+    "foreground": "#252525",
+    "card": "#FFFFFF",
+    "cardForeground": "#252525",
+    "primary": "#343434",
+    "primaryForeground": "#FAFAFA",
+    "secondary": "#F5F5F5",
+    "secondaryForeground": "#343434",
+    "muted": "#F5F5F5",
+    "mutedForeground": "#737373",
+    "accent": "#F5F5F5",
+    "accentForeground": "#343434",
+    "destructive": "#E7000B",
+    "destructiveForeground": "#E7000B",
+    "border": "#EBEBEB",
+    "input": "#EBEBEB",
+    "ring": "#A1A1A1",
+    "glassBackground": "#FFFFFF",
+    "glassOpacity": 0.72,
+    "glassBlur": 24
+  },
+  "dark": {
+    "background": "#252525",
+    "foreground": "#FAFAFA",
+    "card": "#252525",
+    "cardForeground": "#FAFAFA",
+    "primary": "#FAFAFA",
+    "primaryForeground": "#343434",
+    "secondary": "#444444",
+    "secondaryForeground": "#FAFAFA",
+    "muted": "#444444",
+    "mutedForeground": "#A1A1A1",
+    "accent": "#444444",
+    "accentForeground": "#FAFAFA",
+    "destructive": "#82181A",
+    "destructiveForeground": "#FF6467",
+    "border": "#444444",
+    "input": "#444444",
+    "ring": "#707070",
+    "glassBackground": "#252525",
+    "glassOpacity": 0.65,
+    "glassBlur": 28
+  },
+  "chart": {
+    "light": ["#F54900", "#009689", "#104E64", "#FFB900", "#FE9A00"],
+    "dark": ["#7C86FF", "#00BC7D", "#FFBA00", "#FF637E", "#FB64B6"]
+  },
+  "semantic": {
+    "light": {
+      "success": "#16A34A",
+      "warning": "#CA8A04",
+      "info": "#2563EB"
+    },
+    "dark": {
+      "success": "#22C55E",
+      "warning": "#EAB308",
+      "info": "#3B82F6"
+    }
+  }
+}

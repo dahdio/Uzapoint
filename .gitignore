@@ -1,0 +1,20 @@
+# v0 runtime files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+
+# Common ignores
+node_modules/
+.next/
+.env*.local
+.DS_Store
+
+# Flutter
+Mobile_App/.dart_tool/
+Mobile_App/build/
+Mobile_App/.flutter-plugins
+Mobile_App/.flutter-plugins-dependencies
+Mobile_App/.packages
+Mobile_App/pubspec.lock
+Mobile_App/**/Generated.xcconfig
+Mobile_App/**/flutter_export_environment.sh

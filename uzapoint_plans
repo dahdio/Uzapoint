@@ -1,0 +1,650 @@
+Here is a **complete mobile screen map** for **UzaPoint (`Mobile_App`)**, aligned with your web app (`Frontend_Web`) but tuned for **phone/tablet POS** use. No code — structure and naming only.
+
+---
+
+## How to think about mobile vs web
+
+| Web | Mobile |
+|-----|--------|
+| Marketing landing (`/`) | Usually **not** in the store app — use website or a light **Welcome** screen |
+| Sidebar navigation | **Bottom navigation** (4–5 tabs) + stacks for detail flows |
+| Dialogs (receipt, add product) | Often **full screens** or bottom sheets |
+| Dense tables | **Lists** + tap → **detail** screens |
+
+---
+
+## Recommended main navigation (logged-in)
+
+Typical bottom tabs for v1:
+
+1. **Home** (Dashboard)  
+2. **POS** (primary — center or highlighted)  
+3. **Inventory**  
+4. **More** (Payments, Reports, Analytics, Resellers, Settings)
+
+POS should be the fastest path — many shop owners live there all day.
+
+---
+
+## 1. App launch & authentication
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 1.1 | **Splash** | Brand, load session / config |
+| 1.2 | **Welcome** (first install) | Short value prop; Sign in / Sign up |
+| 1.3 | **Login** | Email or phone + password |
+| 1.4 | **Sign up** | Account creation (matches web) |
+| 1.5 | **Forgot password** | Request reset link / OTP |
+| 1.6 | **Reset password** | New password (deep link from email/SMS) |
+| 1.7 | **Verify OTP** (optional) | Phone/email verification |
+| 1.8 | **Biometric unlock** (optional) | Face/Touch after first login |
+| 1.9 | **Select business** (if user has many) | Switch store/tenant |
+| 1.10 | **Select branch** (optional, multi-location) | Pick branch before shift |
+| 1.11 | **Session expired** | Re-login prompt |
+| 1.12 | **Force update** | Block old app versions |
+
+*Skip full marketing landing pages inside the app; keep those on web.*
+
+---
+
+## 2. Onboarding (after sign up)
+
+Mirrors web onboarding (`/onboarding`):
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 2.1 | **Onboarding progress** | Step indicator (account → business → ready) |
+| 2.2 | **Business category** | Retail, food, pharmacy, etc. (same list as web) |
+| 2.3 | **Business basics** (optional step) | Name, phone, address — if not collected at signup |
+| 2.4 | **Sale mode** | Retail vs wholesale default |
+| 2.5 | **Onboarding complete** | “Go to POS” / “Go to Dashboard” |
+
+---
+
+## 3. Home / Dashboard
+
+Matches web `/dashboard`:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 3.1 | **Dashboard home** | Today’s sales, orders, key metrics |
+| 3.2 | **Metric detail** (optional) | Tap a card → breakdown |
+| 3.3 | **Recent sales list** | From dashboard widget |
+| 3.4 | **Quick actions** | New sale, add product, view low stock |
+| 3.5 | **Notifications inbox** | Bell icon — alerts, low stock, payment events |
+| 3.6 | **Notification detail** | Single alert |
+| 3.7 | **Global search** | Products, orders, customers (header search) |
+
+---
+
+## 4. POS (core — highest priority)
+
+Matches web `/pos` + checkout flows; split for mobile UX:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 4.1 | **POS main** | Product grid/list, category chips, cart summary bar |
+| 4.2 | **Cart** | Line items, qty, discounts, subtotal |
+| 4.3 | **Product search** | Search by name/SKU |
+| 4.4 | **Barcode scanner** | Camera scan → add to cart |
+| 4.5 | **Manual SKU entry** | Type barcode if scan fails |
+| 4.6 | **Product quick view** | Price, stock, variant before add |
+| 4.7 | **Customer attach** (optional) | Pick or add customer for sale |
+| 4.8 | **Sale mode toggle** | Retail / wholesale (matches web context) |
+| 4.9 | **Wholesale qty / unit** | Min qty, unit pricing rules |
+| 4.10 | **Checkout** | Review total, tax, discounts |
+| 4.11 | **Payment method** | Cash, M-Pesa, card, split payment |
+| 4.12 | **Cash payment** | Amount tendered, change |
+| 4.13 | **M-Pesa payment** | STK push / paybill / till — status polling |
+| 4.14 | **Card payment** (optional) | External terminal or integrated SDK |
+| 4.15 | **Split payment** | Part cash + part M-Pesa |
+| 4.16 | **Payment processing** | Loading / waiting for confirmation |
+| 4.17 | **Payment failed / retry** | Error handling |
+| 4.18 | **Sale success** | Order ID, amount paid |
+| 4.19 | **Receipt preview** | Digital receipt |
+| 4.20 | **Share / print receipt** | SMS, WhatsApp, email, Bluetooth printer |
+| 4.21 | **Park / hold sale** | Save cart for later |
+| 4.22 | **Held sales list** | Resume parked carts |
+| 4.23 | **Open shift** (optional) | Opening cash float |
+| 4.24 | **Close shift** | End-of-day cash count vs expected |
+| 4.25 | **Shift summary** | Sales by method during shift |
+| 4.26 | **Offline POS banner** | Visible when no network |
+| 4.27 | **Pending sync queue** | Unsynced sales list + retry |
+| 4.28 | **Cashier PIN lock** (optional) | Lock POS when idle |
+
+---
+
+## 5. Sales history (often separate from POS)
+
+Web embeds “recent sales” in dashboard; mobile benefits from a dedicated area:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 5.1 | **Sales list** | Filter by date, status, payment method |
+| 5.2 | **Sale detail** | Items, payments, cashier, timestamp |
+| 5.3 | **Refund / void** (role-gated) | Reverse or partial refund |
+| 5.4 | **Reprint receipt** | From past sale |
+| 5.5 | **Export / share sale** (optional) | PDF for accountant |
+
+---
+
+## 6. Inventory
+
+Matches web `/inventory`:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 6.1 | **Inventory list** | Search, filter by category, low-stock filter |
+| 6.2 | **Product detail** | Stock, SKU, prices, cost, variant |
+| 6.3 | **Add product** | Create new item |
+| 6.4 | **Edit product** | Update fields |
+| 6.5 | **Adjust stock** | Increase/decrease with reason |
+| 6.6 | **Stock adjustment history** | Audit trail per product |
+| 6.7 | **Categories manage** (optional v2) | Add/rename categories |
+| 6.8 | **Low stock alerts** | List below threshold |
+| 6.9 | **Import products** (optional) | CSV or bulk — may be web-only initially |
+| 6.10 | **Scan to find product** | Barcode → product detail |
+
+---
+
+## 7. Payments
+
+Matches web `/payments`:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 7.1 | **Payments overview** | Today totals by Cash / M-Pesa / Card |
+| 7.2 | **Transactions list** | All payments, filters |
+| 7.3 | **Transaction detail** | Linked order, status, reference |
+| 7.4 | **Reconciliation** (optional) | Match M-Pesa vs system |
+| 7.5 | **Payment settings shortcut** | Link to M-Pesa till / paybill config |
+
+---
+
+## 8. Analytics
+
+Matches web `/analytics`:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 8.1 | **Analytics home** | Tabs: overview, trends, products |
+| 8.2 | **Sales trend** | Daily/weekly line chart |
+| 8.3 | **Revenue by period** | Monthly bars |
+| 8.4 | **Category breakdown** | Pie / list |
+| 8.5 | **Top products** | Best sellers |
+| 8.6 | **Hourly sales** (optional) | Peak hours |
+| 8.7 | **Date range picker** | Filter all analytics |
+
+*Charts on mobile: scrollable, simple — avoid cramming desktop density.*
+
+---
+
+## 9. Reports
+
+Matches web `/reports`:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 9.1 | **Reports catalog** | Daily sales, inventory, revenue, P&L, etc. |
+| 9.2 | **Generate report** | Period + parameters |
+| 9.3 | **Report preview** | On-screen summary |
+| 9.4 | **Report history** | Past generated reports |
+| 9.5 | **Download / share report** | PDF, share sheet |
+
+*Heavy report building can stay **web-first**; mobile shows summaries + export.*
+
+---
+
+## 10. Resellers / agents
+
+Matches web `/resellers`:
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 10.1 | **Resellers list** | Agents, status, location |
+| 10.2 | **Reseller detail** | Sales, commission, customers |
+| 10.3 | **Add / edit reseller** | Admin only |
+| 10.4 | **Commission summary** (optional) | Period totals |
+
+*Phase 2 if not core for shop-floor staff.*
+
+---
+
+## 11. Settings & account
+
+Matches web `/settings` tabs (Business, Payment, Notifications, Account):
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 11.1 | **Settings hub** | Grouped menu |
+| 11.2 | **Business information** | Name, phone, email, address, KRA PIN |
+| 11.3 | **Business category** | Change retail/pharmacy/etc. |
+| 11.4 | **Sale mode default** | Retail vs wholesale |
+| 11.5 | **Branding** (optional) | Logo, receipt header |
+| 11.6 | **Payment methods config** | M-Pesa till, paybill, cash/card toggles |
+| 11.7 | **Tax settings** (optional) | VAT, inclusive/exclusive |
+| 11.8 | **Receipt settings** | Footer text, auto-print |
+| 11.9 | **Printer setup** | Bluetooth / network printer pairing |
+| 11.10 | **Notifications preferences** | Push, SMS, low stock |
+| 11.11 | **Account profile** | Name, email, phone |
+| 11.12 | **Change password** | |
+| 11.13 | **Team / staff** (optional) | Invite cashier, roles |
+| 11.14 | **Role & permissions** (optional) | Owner vs cashier |
+| 11.15 | **Subscription / plan** (optional) | Billing |
+| 11.16 | **Language & region** (optional) | Currency, locale |
+| 11.17 | **Theme** (optional) | Light / dark |
+| 11.18 | **About** | Version, legal, support |
+| 11.19 | **Help & support** | FAQ, contact, chat |
+| 11.20 | **Logout** | |
+| 11.21 | **Delete account** (optional) | Compliance |
+
+---
+
+## 12. Mobile-only / system screens
+
+| # | Screen | Purpose |
+|---|--------|---------|
+| 12.1 | **Permissions** | Camera (barcode), notifications |
+| 12.2 | **No internet** | Global offline state |
+| 12.3 | **Maintenance mode** | Backend down |
+| 12.4 | **Error / something went wrong** | Generic retry |
+| 12.5 | **Empty states** | No products, no sales, etc. (can be widgets, not always routes) |
+
+---
+
+## Screen count summary
+
+| Area | Approx. screens |
+|------|-----------------|
+| Auth & launch | 10–12 |
+| Onboarding | 4–5 |
+| Dashboard & notifications | 6–7 |
+| POS & checkout | 20–28 |
+| Sales history | 4–5 |
+| Inventory | 8–10 |
+| Payments | 4–5 |
+| Analytics | 6–7 |
+| Reports | 4–5 |
+| Resellers | 3–4 |
+| Settings | 15–21 |
+| System | 4–5 |
+| **Total (full product)** | **~85–110** routes (many are v2) |
+
+**Realistic v1 mobile (MVP):** ~35–45 screens — focus on **Auth → Onboarding → POS (full checkout) → Inventory list/detail/adjust → Sales list/detail → Dashboard lite → Settings (business + payment + account) → Offline sync**.
+
+---
+
+## Suggested v1 vs v2 rollout
+
+### v1 — ship first (shop floor)
+- Splash, Login, Sign up, Forgot password  
+- Onboarding (category + basics)  
+- Dashboard (metrics + recent sales)  
+- **Full POS flow** (cart, checkout, cash/M-Pesa, receipt)  
+- Barcode scanner  
+- Inventory list, detail, add/edit, stock adjust  
+- Sales list + detail + reprint receipt  
+- Settings: business, payment config, account, logout  
+- Offline indicator + sync queue  
+
+### v2 — owner / manager features
+- Analytics (all charts)  
+- Reports generate & share  
+- Payments reconciliation  
+- Resellers  
+- Shift open/close, held sales  
+- Team/staff roles  
+- Biometric login, printer setup  
+
+### Web-only or tablet-only (optional)
+- Large marketing site  
+- Bulk CSV import  
+- Complex P&L builder UI  
+- Deep reseller commission rules  
+
+---
+
+## Role-based visibility (important)
+
+Not every user sees every screen:
+
+| Role | Typical access |
+|------|----------------|
+| **Cashier** | POS, cart, scanner, held sales, own shift, reprint |
+| **Manager** | + Inventory adjust, sales history, refunds, dashboard |
+| **Owner / Admin** | + Analytics, reports, payments, resellers, all settings |
+
+Hide tabs and menu items by role so the app stays simple on a small phone.
+
+---
+
+## Flow diagram (happy path)
+
+```mermaid
+flowchart TD
+Splash --> Welcome
+Welcome --> Login
+Login --> SelectBiz[Select business - if needed]
+SelectBiz --> Onboard{Onboarded?}
+Onboard -->|No| Cat[Business category]
+Cat --> Dash[Dashboard]
+Onboard -->|Yes| Dash
+Dash --> POS[POS main]
+POS --> Cart
+Cart --> Checkout
+Checkout --> Pay[Payment method]
+Pay --> Success[Sale success]
+Success --> Receipt[Receipt]
+Receipt --> POS
+```
+
+---
+
+## Bottom line
+
+Your mobile app should mirror **web’s logged-in product** (dashboard, POS, inventory, payments, analytics, reports, resellers, settings), **not** the public marketing site. Split web **dialogs** into **mobile screens** (cart, checkout, payment status, receipt, scanner). Prioritize **POS + inventory + auth + settings** for v1; push **analytics, reports, resellers** to v2 unless your users are owners on phones from day one.
+
+If you want a follow-up (still no code), we can turn this into a **single spreadsheet-style checklist** with “v1 / v2 / web-only” per screen and **API dependency** per group for your `Backend` planning.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+You can get an **iOS 26–style** feel in Flutter on **both** iOS and Android while keeping **one UzaPoint palette** shared with `Frontend_Web`. The trick is: **same brand tokens everywhere**, **platform-native motion and chrome where it helps**, and **POS-safe surfaces** where glass and blur would hurt readability.
+
+---
+
+## 1. What “iOS 26 UX” means for UzaPoint
+
+Apple’s iOS 26 direction centers on **Liquid Glass** (translucent, layered, light-reactive UI), **fluid navigation** (toolbars/tab bars that shrink/expand), **edge-to-edge content**, and **controls that feel physical** (buttons/sliders with depth and motion).
+
+For a **POS app**, you should adopt the **patterns**, not every visual effect on every screen:
+
+| iOS 26 idea | Use on UzaPoint mobile | Limit on POS |
+|-------------|------------------------|----------------|
+| Liquid Glass nav / tab bar | Bottom bar, headers, sheets | Avoid on product grid behind prices |
+| Collapsing tab bar | Main 4-tab shell | Keep POS tab always reachable |
+| Morphing toolbar | Inventory, sales list | Checkout: fixed, high-contrast bar |
+| In-place confirmation | Settings toggles, small actions | Payment result: full screen |
+| Edge-to-edge lists | Dashboard, inventory | Cart totals: solid card |
+| Spring / fluid motion | Transitions, cart add | No delay on “Pay” tap |
+
+**Android** should feel **equally modern** (Material 3 expressive, blur where supported), not a cheap iOS clone — same colors, spacing, and components, with **platform-appropriate** navigation gestures and back behavior.
+
+---
+
+## 2. Your web palette (source of truth)
+
+`Frontend_Web` already defines a **neutral, monochrome** system in OKLCH — ideal for cross-platform sync:
+
+| Token | Role (light mode) | Notes |
+|-------|-------------------|--------|
+| `background` | App canvas | Near white |
+| `foreground` | Text, logo “U” block | Near black |
+| `primary` | Buttons, emphasis | Dark gray (~black) |
+| `primary-foreground` | Text on primary | Near white |
+| `secondary` / `muted` | Surfaces, hints | Light gray |
+| `muted-foreground` | Secondary text | Mid gray |
+| `border` / `input` | Dividers, fields | Light border |
+| `destructive` | Errors, void/refund | Red-orange |
+| `chart-1` … `chart-5` | Analytics only | Keep identical on mobile charts |
+| `radius` | **10px** (`0.625rem`) | Cards, buttons, inputs |
+| Dark mode | Full parallel set in `.dark` | Match web toggle |
+
+Brand mark on web: **“U” on `foreground` / `background` invert** — reuse that on mobile splash, login, app icon.
+
+**Recommendation:** Add one shared artifact (no code here — just process):
+
+- `design-tokens/uzapoint_tokens.json` (or YAML) with all OKLCH values + radii + spacing  
+- Web imports it (or documents hex/OKLCH copy)  
+- Flutter `ThemeExtension` reads the same file at build time  
+
+That prevents “mobile gray ≠ web gray” drift.
+
+**Fonts:** Web uses **Geist**. Mobile: **Inter** or **Geist** via font package if licensed; fallback **SF Pro / Roboto** for system harmony on each OS while keeping **sizes and weights** aligned (e.g. title 22 semibold, body 15 regular).
+
+---
+
+## 3. Flutter strategy: one design system, two platform personalities
+
+```mermaid
+flowchart TB
+Tokens[Shared UzaPoint tokens]
+Tokens --> Core[Core widgets: UButton, UCard, UListTile]
+Core --> Adaptive[Adaptive shell]
+Adaptive --> iOS[iOS 26-inspired: glass nav, Cupertino sheets]
+Adaptive --> Android[M3 expressive: tonal surfaces, predictive back]
+```
+
+| Layer | Responsibility |
+|-------|----------------|
+| **Tokens** | Colors, radii, spacing, typography, elevation, motion durations |
+| **Core components** | Same API on both OSes; look 95% identical |
+| **Adaptive shell** | Tab bar behavior, back gesture, status bar, haptics |
+| **Platform polish** | iOS: glass blur, live activities later; Android: dynamic color optional OFF to protect brand |
+
+Use Flutter’s **adaptive** patterns conceptually:
+
+- `TargetPlatform.iOS` → glass tab bar, Cupertino date picker, edge swipe back  
+- `TargetPlatform.android` → Material bottom nav, ripple where appropriate, predictive back  
+
+**Do not** run two completely different apps — cashiers should recognize UzaPoint instantly vs web dashboard.
+
+---
+
+## 4. Mapping iOS 26 features → your screen map
+
+### Global shell (all logged-in screens)
+
+| iOS 26 feature | Flutter approach | UzaPoint use |
+|----------------|------------------|--------------|
+| Liquid Glass tab bar | `BackdropFilter` + semi-transparent bar; `NavigationBar` custom | Home / POS / Inventory / More |
+| Bar minimizes on scroll | `NestedScrollView` + `SliverAppBar` | Dashboard, inventory list |
+| Edge-to-edge content | `SafeArea` only where needed; list under glass bar | Analytics, sales history |
+| Large title → inline title | Collapsing header | “Inventory”, “Payments” |
+
+**POS tab exception:** Center **POS** tab — larger icon, solid or lightly glass **primary** pill; always visible (no hide-on-scroll on POS root).
+
+### Authentication & onboarding
+
+| Screen | iOS 26 style | Palette rule |
+|--------|--------------|--------------|
+| Splash | Subtle glass logo plate on `background` | “U” = `foreground` on `primary` or inverted |
+| Welcome | Full-bleed soft gradient using `muted` only — **no new brand colors** | |
+| Login / Sign up | Frosted card on `card` + `border` | Primary button = web `primary` |
+| Biometric | System UI; your frame uses `card` | |
+
+### Dashboard (3.x)
+
+- Metric cards: **solid `card`**, light shadow — not glass (read numbers fast).  
+- Charts: **`chart-1`–`chart-5`** exactly as web.  
+- Quick actions: glass **chips** OK for decoration; labels on solid fill.
+
+### POS (4.x) — special rules
+
+| Screen | Style |
+|--------|--------|
+| POS main | Solid `background`; category chips `secondary`; selected = `primary` |
+| Cart / Checkout | **Opaque** panels — prices and Pay CTA must pass WCAG contrast |
+| Payment processing | Glass overlay OK on dimmed scrim |
+| Receipt | Paper-like `card` (white/black), monospace totals optional |
+| Scanner | Full-screen camera; UI chrome glass **top/bottom only** |
+| Offline banner | `destructive` or amber semantic — define `warning` token if web adds it later |
+
+**Rule:** Glass for **chrome**, solid for **money and SKUs**.
+
+### Inventory, sales, payments, analytics, reports
+
+- Lists: edge-to-edge rows, `border` separators, swipe actions (iOS) / swipe + long-press (Android).  
+- Detail screens: hero product name + solid info sections.  
+- Filters: **bottom sheet** with glass handle (iOS 26 sheet style) — shared on both platforms via `showModalBottomSheet` styling.
+
+### Settings (11.x)
+
+- Grouped list like iOS Settings — matches web tabs (Business, Payment, Notifications, Account).  
+- Toggles: platform switch with **tint = `primary`**.  
+- Destructive rows: `destructive` only.
+
+---
+
+## 5. Motion & interaction (iOS 26 “feel” in Flutter)
+
+| Interaction | Spec suggestion |
+|-------------|-----------------|
+| Page push | 300–350ms, easeOutCubic; iOS parallax optional |
+| Bottom sheet | Spring open; drag dismiss; glass header strip |
+| Add to cart | Brief scale + haptic (light); badge bounce |
+| Pay success | Confetti **off** by default; clear checkmark + haptic success |
+| Tab switch | Cross-fade or shared axis; POS tab no heavy animation |
+| Pull to refresh | Both platforms on lists |
+| Error shake | Subtle on invalid PIN / failed M-Pesa |
+
+Use **`flutter_animate`** or built-in `AnimationController` with **one motion token file** (durations/easing) shared across platforms.
+
+**Haptics:** Light on add-to-cart; medium on payment success; heavy on void/refund confirm.
+
+---
+
+## 6. Android parity (not a second-class UI)
+
+| iOS 26 pattern | Android equivalent |
+|----------------|-------------------|
+| Liquid Glass bar | M3 **surface container** + blur on Android 12+ (`RenderEffect`) |
+| Collapsing header | `NestedScrollView` + `LargeTopAppBar` |
+| Sheets | Modal bottom sheet, rounded top `radius-xl` |
+| In-place alert | Snackbar or anchored dialog |
+| Dynamic Island | Skip; use status banner for M-Pesa pending |
+
+**Material You dynamic color:** **Off by default** so teal/purple doesn’t break UzaPoint neutrals. Optional “use wallpaper colors” in settings v2 for consumer-facing apps only — **not recommended for POS**.
+
+---
+
+## 7. Component library to define once (Flutter + mirror on web later)
+
+| Component | Web (shadcn) | Mobile |
+|-----------|--------------|--------|
+| Primary button | `Button` default | `UPrimaryButton` — `primary` / `primary-foreground` |
+| Secondary | `outline` / `secondary` | `USecondaryButton` |
+| Card | `Card` | `UCard` — radius 10, `border` |
+| Input | `Input` | `UTextField` — same height ~36–44dp |
+| Badge / status | `Badge` | `UBadge` — stock low, payment pending |
+| Metric tile | Dashboard cards | `UMetricCard` — solid, not glass |
+| List row | Table rows | `UListTile` |
+| Tab bar | Sidebar items | `UMainTabBar` — glass |
+| Bottom sheet | Dialog | `USheet` |
+| Empty state | — | `UEmpty` — `muted-foreground` |
+
+Semantic colors to add for mobile (align web when you can):
+
+| Semantic | Use |
+|----------|-----|
+| `success` | Paid, stock in |
+| `warning` | Low stock, pending sync |
+| `destructive` | Void, failed payment |
+| `info` | M-Pesa processing |
+
+Derive from existing palette (e.g. success = muted green-gray, not neon) so brand stays calm and professional.
+
+---
+
+## 8. Dark mode
+
+Web already has `.dark` tokens — mobile **must** use the same OKLCH pairs:
+
+- POS in dark: popular in shops at night; test **scanner overlay** and **receipt preview**.  
+- Glass in dark: higher blur, lower opacity, **lighter border** (`border` token).  
+- Charts: switch to dark `chart-1`–`5` set from CSS.
+
+**System setting** + in-app toggle in Settings (11.17) matching web.
+
+---
+
+## 9. Tablet vs phone
+
+| Device | Navigation | iOS 26 notes |
+|--------|------------|--------------|
+| Phone | Bottom tabs | Collapsing glass bar |
+| Tablet | Optional **navigation rail** + POS split view (products | cart) | Glass rail; POS two-pane like web layout |
+
+Tablet POS can mirror **web POS** layout while phone keeps stacked flows — **same tokens**, different layout breakpoints.
+
+---
+
+## 10. What not to do
+
+- Full Liquid Glass on checkout totals or barcode overlay.  
+- Different primary color on mobile (e.g. blue) vs web black — breaks brand.  
+- iOS-only features with no Android fallback (live activities, etc.) in v1.  
+- Heavy animations before M-Pesa callback returns.  
+- Tiny touch targets on POS (min **48dp**; prefer 56 for cart qty).  
+- Custom fonts that don’t support **KES** and numerals tabular lining for amounts.
+
+---
+
+## 11. Suggested packages / capabilities (conceptual)
+
+| Need | Direction |
+|------|-----------|
+| Blur / glass | `BackdropFilter`, `ImageFilter.blur`; test performance on low-end Android |
+| Adaptive UI | `flutter_platform_widgets`, or manual `Theme.of` + `Platform.isIOS` |
+| Icons | `lucide` equivalents — web uses Lucide; use same icon set on mobile |
+| Charts | `fl_chart` with token colors from `chart-1`–`5` |
+| Scanner | `mobile_scanner` — custom overlay using tokens |
+| Theme | `ThemeExtension` for `UzapointColors` |
+
+On **iOS 26 devices**, watch for Apple’s **glass APIs** in Flutter ecosystem over time; wrap them behind your `UGlassSurface` so Android keeps one code path.
+
+---
+
+## 12. v1 vs v2 for “iOS 26 polish”
+
+### v1 (ship with MVP screens)
+- Shared token file + light/dark  
+- Glass **tab bar** + solid POS/checkout  
+- Collapsing headers on Dashboard & Inventory  
+- Bottom sheets for filters and payment method  
+- Motion on cart + success; haptics  
+- Geist/Inter typography aligned with web  
+
+### v2
+- Deeper glass on More menu and settings groups  
+- Widget / Live Activity for “M-Pesa pending” (iOS only)  
+- Tablet split POS  
+- Optional tinted app icon (iOS 26 style) using **monochrome** brand assets  
+
+---
+
+## 13. Design QA checklist (web ↔ mobile)
+
+- [ ] Primary button side-by-side screenshot: web login vs mobile login  
+- [ ] Dashboard metric cards same border radius and gray scale  
+- [ ] Dark mode: same 3 surfaces (`background`, `card`, `muted`)  
+- [ ] Charts use identical 5 series colors  
+- [ ] Destructive actions same red family  
+- [ ] Logo “U” same corner radius (`rounded-md` ≈ 6–8dp)  
+
+---
+
+## Bottom line
+
+**Yes:** Flutter can deliver an **iOS 26–inspired** experience (Liquid Glass navigation, fluid headers, modern sheets and motion) on **iOS and Android**, while **locking colors, radius, and chart hues** to your existing `Frontend_Web` OKLCH tokens. Treat **POS and payment screens as high-contrast, solid UI**; use glass and motion for **navigation, settings, and secondary flows**. Centralize tokens once so web and mobile never diverge.
+
+If you want a follow-up (still no code), we can produce a **screen-by-screen UI spec table** (glass vs solid, components, motion) for every v1 screen from your mobile map.
